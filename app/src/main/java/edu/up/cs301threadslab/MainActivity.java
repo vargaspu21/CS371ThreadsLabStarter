@@ -36,6 +36,9 @@ public class MainActivity extends Activity
         //Let me know when someone adjusts the seekbar
         theSeekBar = (SeekBar)findViewById(R.id.seekBar);
         theSeekBar.setOnSeekBarChangeListener(this);
+
+        ThreadSubclass ts = new ThreadSubclass("name");
+        ts.start();
     }//onClick
 
     @Override
@@ -53,5 +56,21 @@ public class MainActivity extends Activity
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {}
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        try{
+            Thread.sleep(3000);
+        }
+        catch (InterruptedException e){
+            System.out.println(e);
+        }
+        //CHECKPOINT 2
+        //using this sleep method causes the seekbar to be slow.
+
+
+        myAV.invalidate(); //added this so the animation draws automatically as the seekpar changes
+        //CHECKPOINT 1
+        // Much quicker to create a thread than a process.
+        //Much quicker to switch between threads than to switch between processes.
+        //Threads share data easily
+    }
 }
